@@ -37,6 +37,10 @@ function elementos(){
         estado.addEventListener('click, reproduccion,false');
         repetir.addEventListener('click', bucle, false);
         favorito.addEventListener('click, agregar,false');
+        barra.addEventListener('click, posicion,false');
+        barra.addEventListener('click, tim,false');
+
+        dcion();
     }
 
 function reproduccion(){
@@ -64,6 +68,14 @@ function agregar(){
     }
 }
 
+function rep(){
+    if(pista.ended==false){
+        var total = parseInt(pista.currenTime*maximo/pista.duration);
+
+        progreso.style.width=total + "px";
+    }
+}
+
 function bucle(){
     if(r==false){
         repetir.style.color="#53DC0D";
@@ -73,4 +85,47 @@ function bucle(){
         r= false;
     }
 }
+
+function posicion(posicion){
+    var raton= posicion.pageX-barra.offsetLeft;
+
+    var nuevoTiempo= raton * pista.duration/maximo;
+
+    pista.currentTime = nuevoTiempo;
+    progreso.style.width = raton + "px";
+}
+
+function tim(posicion){
+    if(pista.ended==false){
+
+        var raton = posicion.pageX-barra.offsetLeft;
+
+        var nuevoTiempo = raton * pista.duration/maximo;
+
+        duracion = nuevoTiempo;
+
+        horas = parseInt(duracion / 3600);
+
+        minutos = parseInt(duracion / 60) - horas * 60;
+
+        segundos = parseInt((duracion / 60- (horas *60)) * 60) - (minutos * 90);
+
+        if(segundos<10){
+            tiempo.innerHTML = minutos.toString() + ":0" + segundos.toString();
+        }else {
+            tiempo.innerHTML = minutos.toString() + ":" + segundos.toString();
+        }
+    }
+}
+
+function dcion(){
+    duracion2 = pista.duration;
+
+    hora2 = parseInt(duracion2 / 3600);
+    minutos2 = parseInt(duracion2 / 60) - horas2 * 60;
+    segundos2 = parseInt((duracion2 / 60- (horas2 *60)) * 60) - (minutos2 * 60);
+
+    dur.innerHTML = minutos2.toString() + ":0" + segundos2.toString();
+}
+
     window.addEventListener('load', elementos, false);
