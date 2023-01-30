@@ -35,6 +35,8 @@ function elementos(){
         fav = document.getElementById('fav');
 
         estado.addEventListener('click, reproduccion,false');
+        repetir.addEventListener('click', bucle, false);
+        favorito.addEventListener('click, agregar,false');
     }
 
 function reproduccion(){
@@ -46,8 +48,29 @@ function reproduccion(){
         icono.className= "fas fa-pause-circle";
 
         load = setInterval(rep,1);
-
     }    
     }
 
-    window.addEventListener('load', elemetos, false);
+function agregar(){
+    if(f==false){
+        fav.className="fas fa-heart";
+        f = true;
+        alert('cancion agregada');
+    }else{
+        fav.className="fas fa-heart";
+        f= false;
+        alert('cancion eliminada');
+
+    }
+}
+
+function bucle(){
+    if(r==false){
+        repetir.style.color="#53DC0D";
+        r=true;
+    }else{
+        repetir.style.color="#FFF";
+        r= false;
+    }
+}
+    window.addEventListener('load', elementos, false);
